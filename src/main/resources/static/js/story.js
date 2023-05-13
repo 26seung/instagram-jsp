@@ -181,7 +181,7 @@ function addComment(imageId) {
       let comment = res.data;
 
       let content = `
-				  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
+				  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"> 
 					<p>
 					  <b>${comment.user.username} :</b>
 					  ${comment.content}
