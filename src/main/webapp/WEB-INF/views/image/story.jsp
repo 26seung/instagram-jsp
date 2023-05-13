@@ -12,6 +12,6 @@
 		</article>
 	</section>
 </main>
-<script src="/js/image.js"></script>
+<script src="/js/story.js"></script>
 </body>
 </html>
