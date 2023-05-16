@@ -102,7 +102,7 @@ pageEncoding="UTF-8" %> <%@ include file="../layout/header.jsp" %>
 
         <c:forEach var="image" items="${dto.user.images}">
           <div class="img-box">
-          <a href="/image/story">
+          <a href="/image/story/${image.id}">
              <img src="/upload/${image.postImageUrl}" />
             <div class="comment">
               <p>
