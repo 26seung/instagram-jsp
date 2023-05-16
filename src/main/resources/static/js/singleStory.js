@@ -13,25 +13,25 @@ let principalId = $("#principalId").val();
 // (1) 스토리 로드하기
 
 let page = 0;
-
-function storyLoad() {
+function storyLoad(imageId) {
   $.ajax({
-    url: `/api/image?page=${page}`,
+    url: `/api/image/${imageId}`,
     dataType: "json",
   })
     .done((res) => {
       console.log(res);
-      res.data.content.forEach((image) => {
+      let image = res.data;
+//      res.data.forEach((image) => {
         let storyItem = getStoryItem(image);
         $("#storyList").append(storyItem);
-      });
+//      });
     })
     .fail((err) => {
       console.log("오류: ", err);
     });
 }
 
-storyLoad();
+storyLoad(imageId);
 
 function getStoryItem(image) {
   let item = `<div class="story-list__item">
@@ -91,20 +91,20 @@ function getStoryItem(image) {
 }
 
 // (2) 스토리 스크롤 페이징하기
-$(window).scroll(() => {
-  // console.log("윈도우 scrollTop: ", $(window).scrollTop());
-  // console.log("문서의 height: ", $(document).height());
-  // console.log("윈도우 height: ", $(window).height());
-
-  let checkNum =
-    $(window).scrollTop() - ($(document).height() - $(window).height());
-  // console.log(checkNum)
-
-  if (checkNum < 1 && checkNum > -1) {
-    page++;
-    storyLoad();
-  }
-});
+//$(window).scroll(() => {
+//  // console.log("윈도우 scrollTop: ", $(window).scrollTop());
+//  // console.log("문서의 height: ", $(document).height());
+//  // console.log("윈도우 height: ", $(window).height());
+//
+//  let checkNum =
+//    $(window).scrollTop() - ($(document).height() - $(window).height());
+//  // console.log(checkNum)
+//
+//  if (checkNum < 1 && checkNum > -1) {
+//    page++;
+//    storyLoad();
+//  }
+//});
 
 // (3) 좋아요, 안좋아요
 function toggleLike(imageId) {
