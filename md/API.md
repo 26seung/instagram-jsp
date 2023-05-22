@@ -52,7 +52,8 @@
                 "message": "구독자 정보 리스트 가져오기 성공",
                 "data": [
                     {
-                        // 구독자 정보
+                        int :id, String :username, String :profileImageUrl, 
+                        Integer :subscribeState, Integer :equalUserState
                     }
                 ]
             }
@@ -79,7 +80,8 @@
                 "message": "회원수정완료",
                 "data": [
                     {
-                        // 구독자 정보
+                        String :name, String :password, String :website,
+                        String :bio, String :phone, String :gender
                     }
                 ]          
           }
@@ -156,7 +158,7 @@ API 문서를 작성하기 위해 코드를 살펴보았습니다. 아래는 주
                 "code": 1,
                 "message": "성공",
                 "data": {
-                    // 이미지 스토리 정보 (페이지네이션 적용)
+                    int :likeCount, boolean :likeState, User id
                 }
             }
             ```
@@ -179,7 +181,7 @@ API 문서를 작성하기 위해 코드를 살펴보았습니다. 아래는 주
                 "code": 1,
                 "message": "성공",
                 "data": {
-                    // 단일 이미지 스토리 정보
+                     int :likeCount, boolean :likeState, User :id
                 }
             }
             ```
@@ -252,7 +254,7 @@ API 문서를 작성하기 위해 주어진 코드를 살펴보았습니다. 아
                 "code": 1,
                 "message": "댓글쓰기성공",
                 "data": {
-                    // 작성된 댓글 정보
+                    String :content, int :imageId, principalId
                 }
             }
             ```
