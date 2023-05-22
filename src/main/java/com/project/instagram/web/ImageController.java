@@ -29,8 +29,6 @@ public class ImageController {
     @GetMapping("/image/story/{imageId}")
     public String singleStory(@PathVariable int imageId, Model model){
         model.addAttribute("image", imageId);
-        System.out.println("aaa : "+ imageId);
-//        Image images = imageService.단일스토리(principalDetails.getUser().getId(), imageId);
         return "image/singleStory";
     }
     @GetMapping("/image/popular")

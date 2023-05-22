@@ -53,9 +53,6 @@ public class UserApiController {
             BindingResult bindingResult,            //  꼭 @Valid 가 적혀있는 다음 파라미터에 적어야 함
             @AuthenticationPrincipal PrincipalDetails principalDetails){
 
-        //  유효성검사 AOP 알아서 처리됨 (BindingResult 만 있으면)
-//            System.out.println("userUpdateDto: "+ userUpdateDto);
-//            System.out.println("principalDetails : " + principalDetails);         // print 안에 출력하려는 객체가 다른 오브젝트를 포함하고 있어 오류가 발생할 수 있다.
             User userEntity = userService.회원수정(id,userUpdateDto.toEntity());
             // 세션 정보를 업데이트 해주어야 정보 반영이 됨
             principalDetails.setUser(userEntity);
