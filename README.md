@@ -1,36 +1,34 @@
-# Read Me First
-The following was discovered as part of building this project:
+# 인스타그램 클론 코딩 프로젝트
 
-* The original package name 'com.project.instagram-jsp' is invalid and this project uses 'com.project.instagram' instead.
+---
 
-# Getting Started
+#### 관련 페이지 이동
+- [API Document](md/API.md)
+- [AWS Arrchitecture](md/AWS.md)
+---
 
-### Reference Documentation
-For further reference, please consider the following sections:
+### 개요 
 
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.7.11/gradle-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.7.11/gradle-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.7.11/reference/htmlsingle/#web)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.7.11/reference/htmlsingle/#data.sql.jpa-and-spring-data)
-* [Spring Security](https://docs.spring.io/spring-boot/docs/2.7.11/reference/htmlsingle/#web.security)
-* [Validation](https://docs.spring.io/spring-boot/docs/2.7.11/reference/htmlsingle/#io.validation)
-* [OAuth2 Client](https://docs.spring.io/spring-boot/docs/2.7.11/reference/htmlsingle/#web.security.oauth2.client)
+**이 프로젝트는 인스타그램의 기능을 클론 코딩한 웹 애플리케이션입니다.   
+개발 목적은 사용자들이 사진을 공유하고 소셜 네트워크로 연결되는 환경을 구축하는 것 입니다.**
 
-### Guides
-The following guides illustrate how to use some features concretely:
+---
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
-* [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
-* [Authenticating a User with LDAP](https://spring.io/guides/gs/authenticating-ldap/)
-* [Validation](https://spring.io/guides/gs/validating-form-input/)
+### 주요 특징
 
-### Additional Links
-These additional references should also help you:
+- **회원 가입과 로그인** : 사용자는 개인 계정을 생성하고 로그인하여 애플리케이션의 기능을 사용할 수 있습니다.
+- **프로필 관리** : 사용자는 자신의 프로필 사진과 소개를 업로드하고 관리할 수 있습니다.
+- **게시물 작성 및 공유** : 사용자는 사진과 설명을 포함한 게시물을 작성하고 다른 사용자와 공유할 수 있습니다.
+- **게시물 좋아요 및 댓글** : 사용자는 다른 사용자의 게시물에 좋아요를 누르고, 댓글을 작성할 수 있습니다.
+- **팔로우 기능** : 사용자는 다른 사용자를 팔로우하고, 팔로우하는 사용자의 게시물을 피드에서 확인할 수 있습니다.
 
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
+---
 
+### 사용된 기술
+
+- 백엔드: Java, Spring Boot, Spring Security, JPA
+- 프론트엔드: JavaScript, JSP(JavaServer Pages)
+- 데이터베이스: MariaDB
+- 배포: AWS, Docker, Nginx
+
+---
