@@ -1,11 +1,13 @@
 package com.project.instagram.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
+@Slf4j
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {     //  web 설정 파일
 
@@ -21,6 +23,6 @@ public class WebMvcConfig implements WebMvcConfigurer {     //  web 설정 파�
                 .setCachePeriod(60*10*6)    //  1 Hour
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
-        System.out.println("uploadFolder: "+ uploadFolder);
+        log.info("[fileUploadFolder] Path : (" + uploadFolder + "**)");
     }
 }

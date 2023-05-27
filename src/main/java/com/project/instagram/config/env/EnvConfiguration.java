@@ -1,2 +1,5 @@
-package com.project.instagram.config.env;public interface EnvConfiguration {
+package com.project.instagram.config.env;
+
+public interface EnvConfiguration {
+    String getMessage();
 }
