@@ -22,7 +22,7 @@ pageEncoding="UTF-8" %> <%@ include file="../layout/header.jsp" %>
 
         <img
           class="profile-image"
-          src="/upload/${dto.user.profileImanageUrl}"
+          src="/upload/${dto.user.profileImageUrl}"
           onerror="this.src='/images/profileImage.jpg'"
           id="userProfileImage"
         />
