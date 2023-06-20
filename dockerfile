@@ -1,24 +1,16 @@
- # Server:APP
-FROM tomcat:jre11
+ # APP
 
-RUN apt-get update
-RUN apt-get -y install net-tools
-# RUN apt install -y git
-
-RUN mkdir -p /usr/local/tomcat/webapps/myapp
+FROM openjdk:11.0-slim
 
 #  (jar/war) 파일 위치 설정
 ARG JAR_FILE=./build/libs/*-SNAPSHOT.war
 
-# WAR 파일 복사
-COPY ${JAR_FILE} /usr/local/tomcat/webapps/app.war
-
+COPY ${JAR_FILE} app.war
 
 ENV JASYPT_SECRETE_KEY=euseung
 ENV IP_URL_ADDRESS=192.168.0.18
-ENV JAVA_OPTS="-Dspring.profiles.active=prod"
 
-ENTRYPOINT ["catalina.sh", "run"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app.war"]
 
 
  #  수행 명령어 정리
