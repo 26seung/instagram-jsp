@@ -23,6 +23,7 @@ dependencies {
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 	implementation group: 'org.qlrm', name: 'qlrm', version: '3.0.4'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	implementation 'javax.servlet:jstl'
 	implementation 'org.springframework.security:spring-security-taglibs'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
@@ -40,4 +41,5 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+	systemProperty 'jasypt.encryptor.password', findProperty("jasypt.encryptor.password")
 }

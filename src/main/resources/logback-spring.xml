@@ -1,50 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<configuration scan="true" scanPeriod="30 seconds">
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+
+<!--    "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){green} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-&#45;&#45;){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"-->
+
+    <property name="logback" value="logback"/>  <!-- log 저장 최종 폴더 -->
+    <property name="logdir" value="D/Workspace/LogFiles"/>
 
     <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>D:\log\logback\logback-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${logdir}\${logback}\logback-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- or whenever the file size reaches 100MB -->
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] ${PID:- } --- [%thread] [%logger{0}:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>r
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%clr([%d{yyyy-MM-dd HH:mm:ss.SSS}]){magenta} %clr([%-5level]) %clr(${PID:- }){blue} %clr(---){faint} %clr([%thread]){faint} %clr([%logger{0}:%line]){cyan} : %msg %n</pattern>
         </encoder>
     </appender>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>%d{HH:mm:ss.SSS} [%-5level] - %msg%n</Pattern>
-        </layout>
-    </appender>
 
-    <!-- Loggers -->
-    <!-- <logger name="org.apache.catalina" level="ERROR">
-    </logger>
+<!--    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--            <Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] %logger{36} - %msg%n</Pattern>-->
+<!--        </layout>-->
+<!--    </appender>-->
 
-    <logger name="org.apache.commons" level="ERROR">
-    </logger>
 
-    <logger name="org.springframework" level="DEBUG" >
-    </logger>
-
-    <logger name="egovframework.*" level="DEBUG">
-    </logger>
-
-    <logger name="java.sql" level="DEBUG">
-    </logger>
-
-    <logger name="org.mybatis.spring" level="DEBUG">
-    </logger>
-
-    <logger name="egovframework.sqlmappers" level="TRACE">
-    </logger> -->
 
     <root level="INFO">
         <appender-ref ref="ROLLING"/>
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="CONSOLE" />
     </root>
 </configuration>

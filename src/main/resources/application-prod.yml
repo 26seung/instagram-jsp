@@ -23,7 +23,7 @@ spring:
 ## DB 설정
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/photogram?serverTimezone=Asia/Seoul
+    url: jdbc:mariadb://${IP_URL_ADDRESS:}:3306/photogram?serverTimezone=Asia/Seoul
     username: ENC(OkgkUUf+wfPHM1SqplWkeQ==)
     password: ENC(weNVeQ5bSyaMWPDLx6Y2Sw==)
 
@@ -44,7 +44,8 @@ spring:
 
 ## 이미지 파일 저장 경로
 file:
-  path: /Users/euseung/Documents/dev/cloneCoding/photogram/upload/
+  path: /test/images/
+#  path: /Users/euseung/Documents/dev/cloneCoding/photogram/upload/
 
 ## 프로퍼티 암호화
 jasypt:
