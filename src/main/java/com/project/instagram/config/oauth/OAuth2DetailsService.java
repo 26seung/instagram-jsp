@@ -4,6 +4,7 @@ import com.project.instagram.config.auth.PrincipalDetails;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -36,22 +37,20 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService {
         String email = (String)userInfo.get("email");       //   Object 타입이기 때문에 String 으로 다운 캐스팅
         String name = (String)userInfo.get("name");
 
-        User userEntity = userRepository.findByUsername(username);
+        User userEntity = userRepository.findByUsername(username).orElseThrow(() ->
+                new UsernameNotFoundException("User Not Found with username: " + username));
 
-        if(userEntity == null){
-
-        User user = User.builder()
-                .username(username)
-                .password(password)
-                .email(email)
-                .name(name)
-                .role("ROLE_USER")
-                .build();
-
-        return new PrincipalDetails(userRepository.save(user), oAuth2User.getAttributes());
-        }else {
-            return new PrincipalDetails(userEntity, oAuth2User.getAttributes());
-        }
-
+         if(userEntity == null){
+             User user = User.builder()
+                     .username(username)
+                     .password(password)
+                     .email(email)
+                     .name(name)
+                     .role("ROLE_USER")
+                     .build();
+             return new PrincipalDetails(userRepository.save(user), oAuth2User.getAttributes());
+             }else {
+             return new PrincipalDetails(userEntity, oAuth2User.getAttributes());
+            }
     }
 }

@@ -36,7 +36,7 @@ public class User {
     private String phone;
     private String gender;
 
-    private String profileImanageUrl;   // 사진
+    private String profileImageUrl;   // 사진
     private String role;    // 권한
 
     //  나는 연관관계의 주인이 아니다. 그러므로 테이블에 컬럼을 만들지 않는다.
@@ -65,7 +65,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", gender='" + gender + '\'' +
-                ", profileImanageUrl='" + profileImanageUrl + '\'' +
+                ", profileImageUrl='" + profileImageUrl + '\'' +
                 ", role='" + role + '\'' +
                 ", createDate=" + createDate +
                 '}';

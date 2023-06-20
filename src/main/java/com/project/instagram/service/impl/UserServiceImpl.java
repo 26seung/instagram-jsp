@@ -1,5 +1,6 @@
 package com.project.instagram.service.impl;
 
+import com.project.instagram.domain.image.Image;
 import com.project.instagram.domain.subscribe.SubscribeRepository;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserRepository;
@@ -18,7 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -51,7 +56,7 @@ public class UserServiceImpl implements UserService {
         User userEntity = userRepository.findById(principalId).orElseThrow(()->{
             throw new CustomApiException("유저를 찾을 수 없습니다.");
         });
-        userEntity.setProfileImanageUrl(imageFileName);
+        userEntity.setProfileImageUrl(imageFileName);
 
         return userEntity;
     }       //  더티체킹으로 업데이트 됨.
@@ -74,8 +79,13 @@ public class UserServiceImpl implements UserService {
 
         dto.setSubscribeState(subscribeState == 1);       //  true
         dto.setSubscribeCount(subscribeCount);
+
+        // 이미지를 등록한 시간 역순으로 정렬
+        List<Image> images = userEntity.getImages();
+        Collections.sort(images, Comparator.comparing(Image::getCreateDate).reversed());
+
         //  profile 페이지에서의 좋아요 개수 확인 .. front 단에서 ${image.likes.size} 로 사용해도 되지만 Back 에서 만들어진 데이터를 넘기는것이 좋음
-        userEntity.getImages().forEach(image -> {
+        images.forEach(image -> {
             image.setLikeCount(image.getLikes().size());
         });
 

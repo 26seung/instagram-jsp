@@ -26,7 +26,7 @@ public class ImageApiController {
     public ResponseEntity<?> imageStory(@AuthenticationPrincipal PrincipalDetails principalDetails,
                                         @PageableDefault(size=3, sort = "id") Pageable pageable){
         Page<Image> images = imageService.이미지스토리(principalDetails.getUser().getId(), pageable);
-        System.out.println("imageStory : " + images + "  / principalDetails : " + principalDetails.getUser());
+//        System.out.println("imageStory : " + images + "  / principalDetails : " + principalDetails.getUser());
         return new ResponseEntity<>(new CMRespDto<>(1,"성공", images), HttpStatus.OK);
     }
     @GetMapping("/api/image/{imageId}")
