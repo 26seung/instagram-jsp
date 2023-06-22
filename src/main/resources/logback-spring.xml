@@ -2,15 +2,20 @@
 
 <configuration scan="true" scanPeriod="60 seconds">
 
+    <!--Console Color-->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <!--log path-->
+    <springProperty name="filePath" source="logging.file.path"/>    <!--파일 경로 (yml 위치) -->
+    <springProperty scope="context" name="projectName" source="spring.application.name"/>   <!--프로젝트 이름 (yml 위치) -->
+
 
     <property name="logback" value="logback"/>  <!-- log 저장 최종 폴더 -->
-    <property name="logdir" value="../logs/instagram-jsp/LogFiles"/>
+    <property name="logdir" value="${filePath}/${projectName}/${logback}"/>
 
     <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${logdir}\${logback}\logback-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${logdir}\logback-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- or whenever the file size reaches 100MB -->
                 <maxFileSize>100MB</maxFileSize>

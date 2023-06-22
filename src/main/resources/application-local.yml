@@ -45,6 +45,10 @@ spring:
 ## 이미지 파일 저장 경로
 file:
   path: /Users/euseung/Documents/dev/cloneCoding/photogram/upload/
+## 로그 파일 저장 경로
+logging:
+  file:
+    path: ../logs
 
 ## 프로퍼티 암호화
 jasypt:

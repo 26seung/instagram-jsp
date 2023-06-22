@@ -32,11 +32,7 @@ public class ImageController {
         return "image/singleStory";
     }
     @GetMapping("/image/popular")
-    public String popular(Model model){
-
-        // api 는 데이터를 리턴하는 서버
-        List<Image> images = imageService.인기사진();
-        model.addAttribute("images", images);
+    public String popular(){
         return "image/popular";
     }
     @GetMapping("/image/upload")

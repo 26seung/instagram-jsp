@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ImageService {
 
-    List<Image> 인기사진();
+    Page<Image> 인기사진(int principalId, Pageable pageable);
     Page<Image> 이미지스토리(int principalId, Pageable pageable);
     Image 단일스토리(int principalId, int imageId);
     void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails);

@@ -29,8 +29,8 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Image> 인기사진(){
-        return imageRepository.mPopular();
+    public Page<Image> 인기사진(int principalId, Pageable pageable){
+        return imageRepository.mPopular(principalId, pageable);
     }
 
     @Override

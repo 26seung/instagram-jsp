@@ -35,6 +35,12 @@ public class ImageApiController {
         Image images = imageService.단일스토리(principalDetails.getUser().getId(), imageId);
         return new ResponseEntity<>(new CMRespDto<>(1,"성공", images), HttpStatus.OK);
     }
+    @GetMapping("/api/image/popular")
+    public ResponseEntity<?> popularImage(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                          @PageableDefault(size = 21) Pageable pageable){
+        Page<Image> images = imageService.인기사진(principalDetails.getUser().getId(), pageable);
+        return new ResponseEntity<>(new CMRespDto<>(1,"성공", images), HttpStatus.OK);
+    }
 
 
     @PostMapping("/api/image/{imageId}/likes")

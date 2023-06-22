@@ -1,4 +1,7 @@
 spring:
+  application:
+    name: instagram-jsp
+
   profiles:
     active: local
     include: oauth

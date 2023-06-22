@@ -34,7 +34,8 @@ function storyLoad() {
 storyLoad();
 
 function getStoryItem(image) {
-  let item = `<div class="story-list__item">
+  let item = `
+  <div class="story-list__item">
 	<div class="sl__item__header">
 		<div>
 			<img class="profile-image" src="/upload/${image.user.profileImageUrl}"
