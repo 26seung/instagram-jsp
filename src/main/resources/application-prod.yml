@@ -45,7 +45,6 @@ spring:
 ## 이미지 파일 저장 경로
 file:
   path: /workspace/images/
-#  path: /Users/euseung/Documents/dev/cloneCoding/photogram/upload/
 ## 로그 파일 저장 경로
 logging:
   file:
