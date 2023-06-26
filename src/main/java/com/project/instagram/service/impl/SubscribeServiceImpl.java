@@ -25,12 +25,12 @@ public class SubscribeServiceImpl implements SubscribeService {
     public List<SubscribeDto> 구독리스트(int principalId, int pageUserId){
 
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT u.id ,u.username ,u.profileImanageUrl, ");
+        sb.append("SELECT u.id ,u.username ,u.profileImageUrl, ");
         sb.append("if((SELECT 1 FROM subscribe WHERE fromUserId = ? AND toUserId = u.id),1,0) subscribeState, ");
         sb.append("if((?=u.id),1,0) equalUserState ");
         sb.append("FROM `User` u inner join subscribe s ");
         sb.append("on u.id = s.toUserId ");
-        sb.append("WHERE s.fromUserId = ?");        //      ; 세미콜론 들어오면 안됨
+        sb.append("WHERE s.fromUserId = ?");        // z     ; 세미콜론 들어오면 안됨
 
         // 1물음표 principalId
         // 2물음표 principalId

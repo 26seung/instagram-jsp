@@ -154,23 +154,6 @@ pageEncoding="UTF-8" %> <%@ include file="../layout/header.jsp" %>
   </div>
 </div>
 
-
-<!--게시물 스토리 열기 모달end-->
-
-<div class="story-modal" style="display: none">
-  <div class="modal-header">
-    <button onclick="storyModalClose()">
-      <i class="fas fa-times"></i>
-    </button>
-    </div>
-    <div class="story-image-container">
-      <div class="story-modal-content">
-      <img src="/upload/" alt="이미지" />
-    </div>
-    <div class="story-comment-container">
-      <!-- 댓글들을 표시하는 HTML 구조를 작성합니다. -->
-    </div>
-  </div>
 </div>
 
 

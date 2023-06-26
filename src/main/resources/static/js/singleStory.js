@@ -19,7 +19,7 @@ function storyLoad(imageId) {
     dataType: "json",
   })
     .done((res) => {
-      console.log(res);
+//      console.log(res);
       let image = res.data;
 //      res.data.forEach((image) => {
         let storyItem = getStoryItem(image);

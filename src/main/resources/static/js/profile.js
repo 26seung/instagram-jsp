@@ -46,7 +46,7 @@ function subscribeInfoModalOpen(pageUserId) {
 		url: `/api/user/${pageUserId}/subscribe`,
 		dataType: "json"
 	}).done(res => {
-		console.log("subscribeInfoModalOpen: ", res.data)
+//		console.log("subscribeInfoModalOpen: ", res.data)
 
 		res.data.forEach((u)=>{
 			let item = getSubscribeModalItem(u);
@@ -90,8 +90,8 @@ function getSubscribeModalItem(u) {
 // (3) 유저 프로파일 사진 변경 (완)
 function profileImageUpload(pageUserId, principalId) {
 
-	console.log("pageUserId: ",pageUserId);
-	console.log("principalId: ",principalId);
+//	console.log("pageUserId: ",pageUserId);
+//	console.log("principalId: ",principalId);
 
 	if (pageUserId != principalId){
 		alert("프로필 해당 유저가 아닙니다.")
@@ -165,28 +165,28 @@ function modalClose() {
 	location.reload();
 }
 
-//  (8) 게시물 스토리 열기
-function storyModalOpen() {
-console.log("storyModalOpen : : ")
-  const modal = document.querySelector('.story-modal');
-//  const imageContainer = modal.querySelector('.story-image-container');
-//  const image = imageContainer.querySelector('img');
-//
-//  // 이미지 URL 설정
-//  image.src = imageUrl;
-
-  // 모달 창 열기
-  modal.style.display = 'flex';
-//  $(".modal-subscribe").css("display", "flex");
-}
-
-function storyModalClose() {
+////  (8) 게시물 스토리 열기
+//function storyModalOpen() {
+////console.log("storyModalOpen : : ")
 //  const modal = document.querySelector('.story-modal');
-
-  // 모달 창 닫기
-//  modal.style.display = 'none';
-  $(".story-modal").css("display", "none");
-}
+////  const imageContainer = modal.querySelector('.story-image-container');
+////  const image = imageContainer.querySelector('img');
+////
+////  // 이미지 URL 설정
+////  image.src = imageUrl;
+//
+//  // 모달 창 열기
+//  modal.style.display = 'flex';
+////  $(".modal-subscribe").css("display", "flex");
+//}
+//
+//function storyModalClose() {
+////  const modal = document.querySelector('.story-modal');
+//
+//  // 모달 창 닫기
+////  modal.style.display = 'none';
+//  $(".story-modal").css("display", "none");
+//}
 
 
 

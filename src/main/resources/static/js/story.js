@@ -177,7 +177,7 @@ function addComment(imageId) {
     dataType: "json",
   })
     .done((res) => {
-      console.log("addComment : ", res);
+//      console.log("addComment : ", res);
 
       let comment = res.data;
 
