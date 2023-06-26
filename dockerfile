@@ -7,8 +7,8 @@ ARG JAR_FILE=./build/libs/*-SNAPSHOT.war
 COPY ${JAR_FILE} app.war
 
 ENV TZ=Asia/Seoul
-ENV JASYPT_SECRETE_KEY=euseung
-ENV IP_URL_ADDRESS=192.168.0.18
+ENV JASYPT_SECRETE_KEY=**
+ENV IP_URL_ADDRESS=**
 
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app.war"]
 
