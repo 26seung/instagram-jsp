@@ -26,7 +26,7 @@
 - **팔로우 기능** : 사용자는 다른 사용자를 팔로우하고, 팔로우하는 사용자의 게시물을 피드에서 확인할 수 있습니다.
 
 
-- **AWS 배포 구성** : 배포시 Public 이 아닌 Private Subnet 을 이용한 [Arrchitecture](md/AWS.md) 를 구성하여 외부에서의 보안을 강화하였습니다.
+- **AWS 배포 구성** : 배포시 Public 이 아닌 Private Subnet 을 이용한 [Arrchitecture](md/AWS.md) 를 구성하고, `Https` 통신으로 외부에서의 보안을 강화하였습니다.
 
 ---
 
