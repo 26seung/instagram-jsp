@@ -17,7 +17,16 @@
 
 ---
 
-### 주요 특징
+### 사용된 기술
+
+- 백엔드: `Java`, `Spring Boot`, `Spring Security`, `JPA`
+- 프론트엔드: `JavaScript`, `JSP(JavaServer Pages)`
+- 데이터베이스: `MariaDB`
+- 배포: `AWS`, `Docker`, `Git`
+
+---
+
+### 주요 기능 & 특징
 
 - **회원 가입과 로그인** : 사용자는 개인 계정을 생성하고 로그인하여 애플리케이션의 기능을 사용할 수 있습니다.
 - **프로필 관리** : 사용자는 자신의 프로필 사진과 소개를 업로드하고 관리할 수 있습니다.
@@ -29,22 +38,24 @@
 - 프로퍼티 암호화 : 외부 라이브러리 `(jasypt)` 를 활용하여 주요 데이터인 API 키 등의 암호화를 통해 보안을 향상.
 - 배포 간소화 : 프로젝트의 배포 환경을 구축하고 관리하기 위해 `Docker`를 사용하여, 어플리케이션과 필요한 종속성을 쉽게 패키징하고 배포 과정을 간소화.
 - **AWS 배포 구성** : 배포시 Public 이 아닌 Private Subnet 을 이용한 [Arrchitecture](md/AWS.md) 를 구성하고, 외부에서의 보안을 강화하기 위해 `HTTPS` 통신을 제공하여 사용자의 개인정보와 데이터를 보호하였습니다.
-
-
-
+###
 
 ---
 
-### 사용된 기술
+### AWS Arrchitecture  
 
-- 백엔드: Java, Spring Boot, Spring Security, JPA
-- 프론트엔드: JavaScript, JSP(JavaServer Pages)
-- 데이터베이스: MariaDB
-- 배포: AWS, Docker, Git
+<img src="https://github.com/26seung/instagram-jsp/assets/79305451/06657766-2368-4bf2-99be-c19f573739ca" width="650" height="400"/>
+
+- 웹 서버는 **Private Subnet** 에 구축하여 보안을 강화하고, 데이터베이스 서버를 분리하여 가용성 확보.
+- 인스턴스의 접근을 관리하기 위해 **Bastion Host** 를 사용하여 Private EC2에 접근하며, 접근이 필요 없는 경우에는 인스턴스를 중지시켜 보안을 강화.
+- VPC 내에서의 인터넷 통신은 **NAT Instance**를 생성하여 가능하도록 설정.
+- 외부 사용자가 접근 시에는 **ACM 과 ALB** 를 사용하여 `ssl/tls` HTTPS(443) 통신을 제공히고, Private 서버에는 **ALB**를 사용하여 HTTP(80) 연결 되도록 구성.
+- 시스템의 가용성을 높이기 위해 추가적인 가용 영역(AZ)을 구성하여 장애 발생 시에도 서비스 지속성을 보장.
+##
 
 ---
 
----
+
 
 ### Page UI
 기본 페이지만에 대한 간단한 소개/설명 입니다.
@@ -52,7 +63,7 @@
 
 #### *Main Page*
 
-<img src="https://github.com/26seung/instagram-jsp/assets/79305451/b4afedaf-63d3-4bac-b082-ecb9691dcf69" width="400" height="300"/>
+<img src="https://github.com/26seung/instagram-jsp/assets/79305451/b4afedaf-63d3-4bac-b082-ecb9691dcf69" width="450" height="350"/>
 
 1. 홈 메뉴 버튼 : 구독중인 계정들에 대한 이미지들만을 로드한다. *(추가로 3개의 이미지씩 페이징 처리되어 최하단 스크롤시 로드된다.)*
 2. 해당 스토리에 대한 Like 기능
@@ -63,7 +74,7 @@
 
 #### *Popular Page*
 
-<img src="https://github.com/26seung/instagram-jsp/assets/79305451/992e37f8-feb8-4c53-8229-7e936f7f64b9" width="400" height="300"/>
+<img src="https://github.com/26seung/instagram-jsp/assets/79305451/992e37f8-feb8-4c53-8229-7e936f7f64b9" width="450" height="350"/>
 
 
 1. 인기 페이지 버튼 : 다른 계정 소유자들이 업로드한 모든 이미지를 로드한다. *(21개의 이미지씩 페이직 처리되어 최하단 스크롤시 로드된다.)*
@@ -73,7 +84,7 @@
 
 #### *Profile Page*
 
-<img src="https://github.com/26seung/instagram-jsp/assets/79305451/49469429-2df5-45d7-8af9-e04c53801724" width="400" height="300"/>
+<img src="https://github.com/26seung/instagram-jsp/assets/79305451/49469429-2df5-45d7-8af9-e04c53801724" width="450" height="350"/>
 
 1. 프로필 페이지 : 로그인 계정에 대한 관리 페이지이다.
 2. (구독하기 / 구독취소) 기능
