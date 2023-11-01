@@ -23,7 +23,7 @@ spring:
 ## DB 설정
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://${IP_URL_ADDRESS:}:3306/photogram?serverTimezone=Asia/Seoul
+    url: jdbc:mariadb://${DB_URL_ADDRESS:}:3306/photogram?serverTimezone=Asia/Seoul
     username: ENC(OkgkUUf+wfPHM1SqplWkeQ==)
     password: ENC(weNVeQ5bSyaMWPDLx6Y2Sw==)
 

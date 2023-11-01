@@ -1,0 +1,33 @@
+version: "3"
+services:
+  # //  MySql Database
+  mariaDB:
+    platform: linux/x86_64
+    image: mariadb:10
+    container_name: photo_mariadb
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      TZ: Asia/Seoul
+      MARIADB_DATABASE: photogram
+      MARIADB_ROOT_PASSWORD: 1234
+      MARIADB_USER: seung
+      MARIADB_PASSWORD: 1234
+    volumes:
+       - /Users/euseung/Documents/dev/cloneCoding/photogram/instagram/docker/data/mysql:/var/lib/mysql
+
+
+  # //  Spring Boot
+  backend:
+    container_name: photo_backend
+    restart: always
+    build: ./
+    ports:
+      - 8080:8080
+    depends_on:
+      - mariaDB
+
+#
+# docker-compose -f docker-compose.yml up -d
+# docker-compose -f docker-compose.yml down
