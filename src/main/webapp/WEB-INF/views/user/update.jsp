@@ -11,8 +11,8 @@ pageEncoding="UTF-8"%> <%@ include file="../layout/header.jsp"%>
       <div class="content-item__01">
         <div class="item__img">
           <img
-            src="/upload/${dto.user.profileImanageUrl}"
-            onerror="this.src='/images/profileImage.png'"
+            src="/upload/${dto.user.profileImageUrl}"
+            onerror="this.src='/images/placeholder.jpg'"
           />
         </div>
         <div class="item__username">

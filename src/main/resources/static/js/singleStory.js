@@ -19,12 +19,12 @@ function storyLoad(imageId) {
     dataType: "json",
   })
     .done((res) => {
-//      console.log(res);
+      //      console.log(res);
       let image = res.data;
-//      res.data.forEach((image) => {
-        let storyItem = getStoryItem(image);
-        $("#storyList").append(storyItem);
-//      });
+      //      res.data.forEach((image) => {
+      let storyItem = getStoryItem(image);
+      $("#storyList").append(storyItem);
+      //      });
     })
     .fail((err) => {
       console.log("오류: ", err);
@@ -90,22 +90,6 @@ function getStoryItem(image) {
   return item;
 }
 
-// (2) 스토리 스크롤 페이징하기
-//$(window).scroll(() => {
-//  // console.log("윈도우 scrollTop: ", $(window).scrollTop());
-//  // console.log("문서의 height: ", $(document).height());
-//  // console.log("윈도우 height: ", $(window).height());
-//
-//  let checkNum =
-//    $(window).scrollTop() - ($(document).height() - $(window).height());
-//  // console.log(checkNum)
-//
-//  if (checkNum < 1 && checkNum > -1) {
-//    page++;
-//    storyLoad();
-//  }
-//});
-
 // (3) 좋아요, 안좋아요
 function toggleLike(imageId) {
   let likeIcon = $(`#storyLikeIcon-${imageId}`);
@@ -163,10 +147,11 @@ function addComment(imageId) {
     content: commentInput.val(),
   };
 
-  // if (data.content === "") {
-  // 	alert("댓글을 작성해주세요!");
-  // 	return;
-  // }
+  // 공백 유호성 체크
+  if (data.content === "") {
+    alert("댓글을 작성해주세요!");
+    return;
+  }
 
   $.ajax({
     type: "post",

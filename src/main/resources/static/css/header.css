@@ -25,6 +25,12 @@
   margin: 0 auto;
   height: 100%;
 }
+.logo h1 {
+  font-size: 20px;
+  font-weight: 800;
+  font-family: "Playpen Sans";
+  color: black;
+}
 
 .logo {
   display: flex;

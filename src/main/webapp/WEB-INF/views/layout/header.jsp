@@ -12,7 +12,7 @@ uri="http://www.springframework.org/security/tags"%>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Instagram</title>
+    <title>PHOTOBUNDLE</title>
 
     <!-- 제이쿼리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -37,7 +37,16 @@ uri="http://www.springframework.org/security/tags"%>
       rel="stylesheet"
     />
   </head>
-
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@600&display=swap"
+    rel="stylesheet"
+  />
   <body>
     <!-- principalId 담아두는 곳-->
     <input type="hidden" id="principalId" value="${principal.user.id}" />
@@ -45,7 +54,8 @@ uri="http://www.springframework.org/security/tags"%>
     <header class="header">
       <div class="container">
         <a href="/" class="logo">
-          <img src="/images/instagram.png" alt="" />
+          <h1>PHOTOBUNDLE</h1>
+          <!-- <img src="/images/instagram.png" alt="" /> -->
         </a>
         <nav class="navi">
           <ul class="navi-list">

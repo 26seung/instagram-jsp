@@ -7,8 +7,9 @@ pageEncoding="UTF-8"%> <%@ include file="../layout/header.jsp" %>
   <section class="upload">
     <!--사진업로드 로고-->
     <div class="upload-top">
-      <a href="home.html" class="">
-        <img src="/images/instagram.png" alt="" />
+      <a href="/" class="">
+        <h1>PHOTOBUNDLE</h1>
+        <!-- <img src="/images/instagram.png" alt="" /> -->
       </a>
       <p>사진 업로드</p>
     </div>
@@ -23,12 +24,21 @@ pageEncoding="UTF-8"%> <%@ include file="../layout/header.jsp" %>
     >
       <input type="file" name="file" onchange="imageChoose(this)" />
       <div class="upload-img">
-        <img src="/images/imageUpload.png" alt="" id="imageUploadPreview" />
+        <img src="" alt="" id="imageUploadPreview" style="display: none" />
+        <span class="material-symbols-outlined" id="dropIcon" style="">
+          place_item
+        </span>
       </div>
 
       <!--사진설명 + 업로드버튼-->
       <div class="upload-form-detail">
-        <input type="text" placeholder="사진설명" name="caption" />
+        <input
+          type="text"
+          placeholder="사진에 대한 설명을 적으세요"
+          name="caption"
+          onfocus="this.placeholder=''"
+          onblur="this.placeholder='사진에 대한 설명을 적으세요'"
+        />
         <button class="cta blue">업로드</button>
       </div>
       <!--사진설명end-->

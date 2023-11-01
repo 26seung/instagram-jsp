@@ -30,6 +30,7 @@
 .setting-container .setting__content .content-item__01 {
   display: flex;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 /*프로필 셋팅 요소들 박스*/
@@ -45,12 +46,15 @@
   padding-right: 30px;
 }
 .setting-container .setting__content .content-item__01 .item__img img {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 .setting-container .setting__content .content-item__01 .item__username {
   flex: 4;
+  font-size: 20px;
+  font-family: "Playpen Sans";
+  padding-bottom: 8px;
 }
 .setting-container .setting__content .content-item__01 .item__btn h2 {
   font-size: 18px;
@@ -78,8 +82,8 @@
   border: 1px solid #dbdbdb;
   height: 32px;
   padding: 0 10px;
-  border-radius: 3px;
   font-size: 16px;
+  border-radius: 6px;
 }
 
 /*form 입력요소 소개부분*/
@@ -109,10 +113,10 @@
 .setting-container .setting__content .content-item__11 .item__input button {
   border: 0;
   background-color: #0095f6;
-  padding: 5px 9px;
+  padding: 8px 14px;
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
+  font-size: 15px;
+  text-align: center;
 }
-
-
