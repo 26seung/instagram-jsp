@@ -4,15 +4,15 @@ phases:
   pre_build:
     commands:
       - echo Logging into Amazon ECR...
-      - echo $AWS_ACCOUNT_ID
+      - echo $IMAGE_REPO_NAME
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - echo Pulling Docker Images for cache...
-      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
       - docker-compose pull --ignore-pull-failures -q
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
   build:
     commands:
       - echo Building Docker image...
-      - docker-compose build -t $REPOSITORY_URI:$IMAGE_TAG
+      - docker-compose build -t $REPOSITORY_URI:$IMAGE_TAG .
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
