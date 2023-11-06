@@ -12,8 +12,8 @@ phases:
   build:
     commands:
       - echo Building Docker image...
-      - docker-compose build -t $REPOSITORY_URI:$IMAGE_TAG .
+      - docker-compose build
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
-      - docker-compose push $REPOSITORY_URI:$IMAGE_TAG
+      - docker-compose push
