@@ -1,6 +1,7 @@
 version: "3"
 services:
-  # //  MySql Database
+
+  # Database : mariaDB
   mariaDB:
     platform: linux/x86_64
     image: mariadb:10
@@ -18,15 +19,26 @@ services:
        - /Users/euseung/Documents/dev/cloneCoding/photogram/instagram/docker/data/mysql:/var/lib/mysql
 
 
-  # //  Spring Boot
-  backend:
+  # was : Spring Boot
+  was:
     container_name: photo_backend
     restart: always
     build: ./
-    ports:
-      - 8080:8080
+    expose:
+      - 8080
     depends_on:
       - mariaDB
+
+  # web server : nginx
+  web:
+    image: nginx
+    container_name: photo_nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - was
 
 #
 # docker-compose -f docker-compose.yml up -d
