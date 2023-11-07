@@ -12,8 +12,9 @@ phases:
   build:
     commands:
       - echo Building Docker image...
-      - docker-compose build
+      - docker-compose -f docker-compose.yml build
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
-      - docker-compose push $REPOSITORY_URI:latest
+      - echo REPOSITORY_URI $REPOSITORY_URI
+      - docker-compose -f docker-compose.yml push
