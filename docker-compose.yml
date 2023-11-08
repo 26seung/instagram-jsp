@@ -5,6 +5,7 @@ services:
   mariaDB:
     platform: linux/x86_64
     image: mariadb:10
+#    image: public.ecr.aws/docker/library/mariadb:latest
     container_name: photo_mariadb
     ports:
       - 3306:3306
@@ -23,7 +24,8 @@ services:
   was:
     container_name: photo_backend
     restart: always
-    build: ./
+#    build: ./
+    image: was
     expose:
       - 8080
     depends_on:
@@ -32,6 +34,7 @@ services:
   # web server : nginx
   web:
     image: nginx
+#    image: public.ecr.aws/nginx/nginx:latest
     container_name: photo_nginx
     ports:
       - 80:80
