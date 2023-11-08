@@ -22,10 +22,10 @@ phases:
       - echo Pushing Docker image to ECR...
       - docker images
       - docker tag was:latest was:latest
-      - docker tag web:latest web:latest
+      - docker tag mariadb:10 mariadb:10
       - docker tag nginx:latest nginx:latest
       - docker-compose -f docker-compose.yml push
       - docker push was:latest
-      - docker push web:latest
+      - docker push mariadb:10
       - docker push nginx:latest
       - docker images
