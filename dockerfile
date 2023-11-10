@@ -14,7 +14,7 @@ ENV JAR_FILE=./build/libs/*-SNAPSHOT.war
 RUN mv ${JAR_FILE} /app/app.war
 
 ENV TZ=Asia/Seoul
-ENV JASYPT_SECRETE_KEY=euseung
+ENV JASYPT_SECRETE_KEY=$JA_SECRET
 ENV DB_URL_ADDRESS=mariaDB
 
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app.war"]

@@ -5,10 +5,11 @@ phases:
     commands:
       - echo Logging into Amazon ECR...
       - echo $IMAGE_REPO_NAME
+      - cat dockerfile
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - echo Pulling Docker Images for cache...
       - docker images
-      - docker-compose pull --ignore-pull-failures -q
+#      - docker-compose pull --ignore-pull-failures -q
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
   build:
     commands:
@@ -21,12 +22,7 @@ phases:
       - echo Build completed on `date`
       - echo Pushing Docker image to ECR...
       - docker images
-      - docker tag was:latest $REPOSITORY_URI/was:latest
-      - docker tag mariadb:10 mariadb:10
-      - docker tag nginx:latest nginx:latest
-      - docker-compose -f docker-compose.yml push
+      - docker tag was:latest $REPOSITORY_URI:latest
       - docker images
-      - docker push $REPOSITORY_URI/was:latest
-      - docker push mariadb:10
-      - docker push nginx:latest
+      - docker push $REPOSITORY_URI:latest
       - docker images
