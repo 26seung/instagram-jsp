@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       - echo Logging into Amazon ECR...
-      - echo $IMAGE_REPO_NAME
+      - aws --version
       - cat dockerfile
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - echo Pulling Docker Images for cache...
@@ -26,3 +26,5 @@ phases:
       - docker images
       - docker push $REPOSITORY_URI:latest
       - docker images
+artifacts:
+  files: docker-compose.yml

@@ -6,7 +6,7 @@ WORKDIR /app
 COPY . .
 #   권한설정 & jar build
 RUN chmod +x ./gradlew
-RUN ./gradlew clean build
+RUN $RUN_BUILD
 
 #  (jar/war) 파일 위치 설정
 ENV JAR_FILE=./build/libs/*-SNAPSHOT.war

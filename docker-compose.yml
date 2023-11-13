@@ -25,7 +25,7 @@ services:
     container_name: photo_backend
     restart: always
 #    build: ./
-    image: was
+    image: 076796029005.dkr.ecr.ap-northeast-2.amazonaws.com/photo-ecr:latest
     expose:
       - 8080
     depends_on:
