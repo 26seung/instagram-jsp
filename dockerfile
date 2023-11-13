@@ -6,7 +6,7 @@ WORKDIR /app
 COPY . .
 #   권한설정 & jar build
 RUN chmod +x ./gradlew
-RUN $RUN_BUILD
+RUN ${RUN_BUILD}
 
 #  (jar/war) 파일 위치 설정
 ENV JAR_FILE=./build/libs/*-SNAPSHOT.war
@@ -14,7 +14,7 @@ ENV JAR_FILE=./build/libs/*-SNAPSHOT.war
 RUN mv ${JAR_FILE} /app/app.war
 
 ENV TZ=Asia/Seoul
-ENV JASYPT_SECRETE_KEY=$JA_SECRET
+ENV JASYPT_SECRETE_KEY=${JA_SECRET}
 ENV DB_URL_ADDRESS=mariaDB
 
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app.war"]
