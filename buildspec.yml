@@ -16,7 +16,7 @@ phases:
       - echo Build started on `date`
       - echo Building Docker image...
       - docker images
-      - docker build -t was .
+      - docker build -t was . --build-arg RUN_BUILD=$RUN_BUILD
   post_build:
     commands:
       - echo Build completed on `date`
