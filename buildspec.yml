@@ -15,16 +15,17 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building Docker image...
-      - docker images
-      - docker build -t was . --build-arg RUN_BUILD="$RUN_BUILD"
+      - docker build -t was . --build-arg JA_SECRET="$JA_SECRET"
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing Docker image to ECR...
-      - docker images
       - docker tag was:latest $REPOSITORY_URI:latest
       - docker images
       - docker push $REPOSITORY_URI:latest
       - docker images
 artifacts:
-  files: docker-compose.yml
+  files:
+    - "appspec.yml"
+    - "scripts/*"
+    - "docker-compose.yml"
