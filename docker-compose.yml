@@ -22,12 +22,10 @@ services:
 
   # was : Spring Boot
   was:
-#    platform: linux/x86_64
     container_name: photo_backend
     restart: always
-    build: ./
+#    build: ./
     image: 076796029005.dkr.ecr.ap-northeast-2.amazonaws.com/photo-ecr:latest
-#    image: was:latest
     expose:
       - 8080
     depends_on:
