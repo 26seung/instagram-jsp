@@ -15,7 +15,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building Docker image...
-      - docker build -t was . --build-arg JA_SECRET="$JA_SECRET"
+#      - docker build -t was . --build-arg JA_SECRET="$JA_SECRET"
+      - docker buildx build --platform linux/amd64 -t was:latest --build-arg JA_SECRET="$JA_SECRET" .
   post_build:
     commands:
       - echo Build completed on `date`
