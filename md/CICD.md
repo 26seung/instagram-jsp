@@ -16,3 +16,7 @@ sudo ./install auto
 서비스 실행중인지 확인 : sudo service codedeploy-agent status
 sudo service codedeploy-agent start
 sudo service codedeploy-agent status
+
+#### Error 관련
+`ERROR [codedeploy-agent(671)]: InstanceAgent::Plugins::CodeDeployPlugin::CommandPoller: Cannot reach InstanceService: Aws::CodeDeployCommand::Errors::AccessDeniedException - Aws::CodeDeployCommand::Errors::AccessDeniedException`
+인스턴스에 기존 AWS 자격증명
