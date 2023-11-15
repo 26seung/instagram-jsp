@@ -18,5 +18,15 @@ sudo service codedeploy-agent start
 sudo service codedeploy-agent status
 
 #### Error 관련
-`ERROR [codedeploy-agent(671)]: InstanceAgent::Plugins::CodeDeployPlugin::CommandPoller: Cannot reach InstanceService: Aws::CodeDeployCommand::Errors::AccessDeniedException - Aws::CodeDeployCommand::Errors::AccessDeniedException`
-인스턴스에 기존 AWS 자격증명
+
+오류문구 : 
+```ERROR [codedeploy-agent(671)]: InstanceAgent::Plugins::CodeDeployPlugin::CommandPoller: Cannot reach InstanceService: Aws::CodeDeployCommand::Errors::AccessDeniedException - Aws::CodeDeployCommand::Errors::AccessDeniedException```
+인스턴스에 기존 AWS 자격 증명 파일이 저장되어 있어 IAM 역활을 지정하여도 인식을 하지 못하는 현상
+
+```
+AWS 자격증명 파일 삭제
+$ sudo rm -rf /root/.aws/credentials
+
+codedeploy-agent 재시작
+$ sudo systemctl restart codedeploy-agent
+```
