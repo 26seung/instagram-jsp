@@ -6,15 +6,15 @@ files:
     destination: /home/ubuntu/deploy
 
 hooks:
-  AfterInstall:
+  ApplicationStop:
+    - location: scripts/stopDocker.sh
+      timeout: 60
+      runas: root
+  BeforeInstall:
     - location: scripts/pullDocker.sh
       timeout: 120
       runas: root
   ApplicationStart:
     - location: scripts/runDocker.sh
-      timeout: 60
-      runas: root
-  ApplicationStop:
-    - location: scripts/stopDocker.sh
       timeout: 60
       runas: root
