@@ -15,7 +15,7 @@ cd /home/ubuntu/deploy
 #elif [ "$DEPLOYMENT_GROUP_NAME" == "production" ]
 #then
   # Remove any anonymous volumes attached to containers
-  docker-compose -f /deploy/docker-compose.yml rm
+  docker-compose down
   # build images and run containers
-  docker-compose -f /deploy/docker-compose.yml up -d
+  docker-compose up -d
 #fi
