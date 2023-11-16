@@ -1,4 +1,4 @@
-#cd /home/ubuntu/deploy
+cd /home/ubuntu/deploy
 # AWS CLI
 echo pullDocker start...
 pwd
@@ -15,5 +15,5 @@ aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS
 #  docker-compose -f /deploy/docker-compose.stage.yml pull
 #elif [ "$DEPLOYMENT_GROUP_NAME" == "production" ]
 #then
-  docker-compose pull
+  docker-compose -f docker-compose.yml pull
 #fi
