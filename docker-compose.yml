@@ -26,7 +26,7 @@ services:
     container_name: photo_backend
     restart: always
 #    build: ./
-    image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
+    image: ${ECR_REPO}
 #    image: 076796029005.dkr.ecr.ap-northeast-2.amazonaws.com/photo-ecr:latest
     expose:
       - 8080
