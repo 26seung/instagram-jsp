@@ -17,6 +17,8 @@ sudo ./install auto
 sudo service codedeploy-agent start
 sudo service codedeploy-agent status
 
+---
+
 #### Error 관련
 
 오류문구 : 
@@ -30,3 +32,50 @@ $ sudo rm -rf /root/.aws/credentials
 codedeploy-agent 재시작
 $ sudo systemctl restart codedeploy-agent
 ```
+
+codeDeploy 파일 관련
+
+배포 실행시 `appspec.yml` 에서 설정한 destination 경로의 EC2 에 파일이 이동되지 않는 문제
+hooks 의 이벤트 단계를 알아야 한다.
+- ApplicationStop - 새 버전을 배포하기 전에 이전 버전의 애플리케이션을 중지하는 단계
+- BeforeInstall - 애플리케이션이 복사되기 전에 실행하는 단계. 여기서 종속성을 설치하거나 기타 사전 설지 작업을 수행한다.
+- Install - 애플리케이션 파일이 인스턴스로 복사되는 단계
+- AfterInstall - 파일이 복사된 후 실행하는 단계
+- ApplicationStart - 애플리케이션을 시작하는 단계
+- ValidateService - 애플리케이션 배포를 검증하는 단계
+
+###### EC2/온프레미스 배포용 AppSpec 파일 예제
+```
+version: 0.0
+os: linux
+files:
+  - source: Config/config.txt
+    destination: /webapps/Config
+  - source: source
+    destination: /webapps/myApp
+hooks:
+  BeforeInstall:
+    - location: Scripts/UnzipResourceBundle.sh
+    - location: Scripts/UnzipDataBundle.sh
+  AfterInstall:
+    - location: Scripts/RunResourceTests.sh
+      timeout: 180
+  ApplicationStart:
+    - location: Scripts/RunFunctionalTests.sh
+      timeout: 3600
+  ValidateService:
+    - location: Scripts/MonitorService.sh
+      timeout: 3600
+      runas: codedeployuser
+```
+다음은 배포 중 이벤트의 순서입니다.
+
+1. Scripts/UnzipResourceBundle.sh에 있는 스크립트를 실행합니다.
+2. 이전 스크립트가 종료 코드 0(성공)을 반환한 경우 이 스크립트를 Scripts/UnzipDataBundle.sh에서 실행합니다.
+3. Config/config.txt 경로의 파일을 /webapps/Config/config.txt 경로로 복사합니다.
+4. source 디렉터리의 파일을 /webapps/myApp 디렉터리로 모두 복사합니다.
+5. Scripts/RunResourceTests.sh에 있는 스크립트를 실행합니다. 제한 시간은 180초(3분)입니다.
+6. Scripts/RunFunctionalTests.sh에 있는 스크립트를 실행합니다. 제한 시간은 3600초(1시간)입니다.
+7. Scripts/MonitorService.sh에 있는 스크립트를 사용자 codedeploy로 실행합니다. 제한 시간은 3600초(1시간)입니다.
+
+---
