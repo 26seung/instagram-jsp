@@ -18,4 +18,6 @@ cd /home/ubuntu/deploy
   docker-compose -f docker-compose.yml down
   # build images and run containers
   docker-compose -f docker-compose.yml up -d
+  # 사용하지 않는 모든 이미지 삭제
+  docker image prune -af
 #fi
