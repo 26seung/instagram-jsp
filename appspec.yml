@@ -7,7 +7,7 @@ files:
 file_exists_behavior: OVERWRITE
 
 hooks:
-  BeforeInstall:
+  AfterInstall:
     - location: scripts/pullDocker.sh
       timeout: 120
       runas: root
