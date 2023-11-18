@@ -28,3 +28,4 @@ artifacts:
     - "appspec.yml"
     - "scripts/*"
     - "docker-compose.yml"
+    - "nginx/*"
