@@ -7,7 +7,8 @@ ECR_LOGIN=$(aws ssm get-parameter --name /ec2/photo/ecr_repo --query 'Parameter.
 # AWS Systems Manager (파라미터 스토어)
 export AWS_DEFAULT_REGION=$(aws ssm get-parameter --name /account/config/region --query 'Parameter.Value' --output text --with-decryption)
 export AWS_ACCOUNT_ID=$(aws ssm get-parameter --name /account/config/id --query 'Parameter.Value' --output text --with-decryption)
-ecport IMAGE_TAG="latest"
+export IMAGE_REPO_NAME=$(aws ssm get-parameter --name /ecr/repo/photo --query 'Parameter.Value' --output text --with-decryption)
+export IMAGE_TAG="latest"
 
 echo ECR_REPO1 : $ECR_LOGIN
 echo ECR_REPO2 : "$ECR_LOGIN"
