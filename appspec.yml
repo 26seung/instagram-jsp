@@ -7,15 +7,15 @@ files:
 file_exists_behavior: OVERWRITE
 
 hooks:
-  BeforeInstall:
-    - location: scripts/stopDocker.sh
-      timeout: 120
-      runas: root
+#  BeforeInstall:
+#    - location: scripts/stopDocker.sh
+#      timeout: 120
+#      runas: root
   AfterInstall:
     - location: scripts/pullDocker.sh
       timeout: 120
       runas: root
-  ApplicationStart:
-    - location: scripts/runDocker.sh
-      timeout: 60
-      runas: root
+#  ApplicationStart:
+#    - location: scripts/runDocker.sh
+#      timeout: 60
+#      runas: root
