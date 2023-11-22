@@ -1,5 +1,20 @@
+## AWS PIPELINE
+
+코드 수정에 따른 배포 과정을 자동화 하기 위해서 `AWS PIPELINE`을 사용하여 배포를 자동화 구성하였다.  
+`GIT` 푸시 - `CODE BUILD` - `CODE DEPLOY` `Elastic Container Registry` `S3` `Parameter Store`
+
+소스 저장소인 `GIT` 에 main 브랜치로 `PUSH` 하게 되면 `PIPELINE`이 트리거를 인식하여 해당 이벤트를 시작한다.
+
+소스코드를 `CODE BUILD`에서 빌드하고, 
+
+애플리케이션을 도커 이미지로 빌드하여 `ECR`(Amazon Elastic Container Registry) 에 업로드하고 `artifacts` 파일들을 `S3 버킷`에 업로드 한다.
+
+`S3 버킷`에 `artifacts` 파일들을 EC2 내로 복사하여 배포스크립트들을 실행한다.
+관련 변수들은 `파라미터 스토어`를 사용하여 암호화된 값들을 입력해주었다.
+스크립트 파일 실행을 통해 ECR 에서 애플리케이션 이미지를 가져오고 해당 컨테이너를 사용하여 재실행 하도록 자동화 구성하였다.
 
 
+---
 
 오류 : exec /usr/local/openjdk-11/bin/java: exec format error
 
