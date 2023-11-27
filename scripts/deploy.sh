@@ -24,9 +24,11 @@ docker-compose -f docker-compose.yml pull
 # remove docker containers
 echo docker container down...
 docker-compose -f docker-compose.yml down
+
 # run docker containers
 echo docker container start...
 docker-compose -f docker-compose.yml up -d
+
 # remove any anonymous images
 docker image prune -af
 

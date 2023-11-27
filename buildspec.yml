@@ -5,11 +5,7 @@ phases:
     commands:
       - echo Logging into Amazon ECR...
       - aws --version
-      - cat dockerfile
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - echo Pulling Docker Images for cache...
-      - docker images
-#      - docker-compose pull --ignore-pull-failures -q
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
   build:
     commands:
@@ -22,7 +18,6 @@ phases:
       - echo Pushing Docker image to ECR...
       - docker tag was:latest $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:latest
-      - docker images
 artifacts:
   files:
     - "appspec.yml"
