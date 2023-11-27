@@ -17,6 +17,7 @@ ENV DB_URL_ADDRESS=mariaDB
 
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app.war"]
 
+
 # # APP
 #FROM openjdk:11.0-slim
 #

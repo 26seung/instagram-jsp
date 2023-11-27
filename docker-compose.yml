@@ -5,7 +5,6 @@ services:
   mariaDB:
     platform: linux/x86_64
     image: mariadb:10
-#    image: public.ecr.aws/docker/library/mariadb:latest
     container_name: photo_mariadb
     ports:
       - 3306:3306
@@ -27,7 +26,6 @@ services:
     restart: always
 #    build: ./
     image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
-#    image: 076796029005.dkr.ecr.ap-northeast-2.amazonaws.com/photo-ecr:latest
     expose:
       - 8080
     depends_on:
@@ -36,7 +34,6 @@ services:
   # web server : nginx
   web:
     image: nginx
-#    image: public.ecr.aws/nginx/nginx:latest
     container_name: photo_nginx
     ports:
       - 80:80
