@@ -29,11 +29,11 @@
 
 # INDEX
 
-1. [CODE BUILD. 구성](/md/AWS/자동화%20파이프라인%20구축/CODEBUILD.md)
-2. [CODE DEPLOY. 구성](#code-deploy-진행)
-3. [CODE PIPELINE. 구성](#code-pipeline-진행)
+1. [CODE BUILD. 구성](/md/AWS/자동화%20파이프라인%20구축/CodeBuild 사용.md)
+2. [CODE DEPLOY. 구성](/md/AWS/자동화%20파이프라인%20구축/CodeDeploy%20사용.md)
+3. [CODE PIPELINE. 구성](/md/AWS/자동화%20파이프라인%20구축/CodePipeline%20사용.md)
 
-- [오류 해결1](#시행착오-겪은-error01)
-- [오류 해결2](#시행착오-겪은-error02)
+- [오류 해결1](/md/AWS/자동화%20파이프라인%20구축/img/경험한%20오류%20정리.md#시행착오-겪은-error01)
+- [오류 해결2](/md/AWS/자동화%20파이프라인%20구축/img/경험한%20오류%20정리.md#시행착오-겪은-error02)
 
 ---
