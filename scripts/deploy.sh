@@ -13,12 +13,14 @@ export AWS_ACCOUNT_ID=$(aws ssm get-parameter --name /account/config/id --query 
 export IMAGE_REPO_NAME=$(aws ssm get-parameter --name /ecr/repo/photo --query 'Parameter.Value' --output text --with-decryption)
 export IMAGE_TAG="latest"
 
+echo $AWS_DEFAULT_REGION
 
 # ECR login
 aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
 
 # pull docker image
 echo docker images pull...
+ls -all
 docker-compose -f docker-compose.yml pull
 
 # remove docker containers

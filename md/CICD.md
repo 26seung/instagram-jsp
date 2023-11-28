@@ -72,7 +72,7 @@ sudo service codedeploy-agent status
 - `--name` 태그를 이용하여 특정 값을 가져올 수 있다.
 - 파라미터 유형이 문자열 값은 상관 없지만 보안 문자열을 사용시에는 `--with-decryption`를 통해 복호화된 값을 볼 수 있다.
 - `aws ssm get-parameter --name /**/** --query 'Parameter.Value' --output text --with-decryption`사용하면 값만 추출가능
-
+- sudo snap install aws-cli --classic
 
 
 ---

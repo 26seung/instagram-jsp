@@ -1,4 +1,4 @@
-## AWS CodeDeploy
+## AWS CodePipeline
 
 ---
 
@@ -9,9 +9,12 @@
 ---
 
 
-### code-pipeline 진행
+### CODE PIPELINE 진행
+
 <br />
+
 ---
+
 ##### 파이프라인 생성
 <img width="795" alt="image" src="https://github.com/26seung/instagram-jsp/assets/79305451/6450e013-714a-45a3-88cc-aa28762721b4">
 <img width="789" alt="image" src="https://github.com/26seung/instagram-jsp/assets/79305451/80973a45-693a-4d57-8d1c-8be89e612611">
@@ -35,7 +38,7 @@
 - 파이프라인 트리거 - 체크 시 소스코드 변경을 감지하여 파이프라인이 시작된다.
 - 출력 아티팩트 형식 - 파이프라인 실행 중 생성된 아티팩트의 형식을 지정. 파이프라인 결과와는 무방하고, 아티팩트의 전송 방식이나 구성을 변경함에 따라 선택이 바뀔 수 있다.
 
-<br / >
+<br />
 
 ##### 파이프라인 (빌드 스테이지 추가)
 <img width="628" alt="image" src="https://github.com/26seung/instagram-jsp/assets/79305451/d4795baf-f907-472a-b71e-b13a6dd3b33a">

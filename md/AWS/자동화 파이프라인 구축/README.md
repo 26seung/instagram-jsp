@@ -2,7 +2,7 @@
 
 ---
 
-![img.png](img/img.png)
+![img.png](etc/img.png)
 
 코드 수정에 따른 배포 과정을 자동화 하기 위해서 `AWS PIPELINE`을 사용하여 배포를 자동화 구성하였다.
 
@@ -29,11 +29,11 @@
 
 # INDEX
 
-1. [CODE BUILD. 구성](/md/AWS/자동화%20파이프라인%20구축/CodeBuild 사용.md)
+1. [CODE BUILD. 구성](/md/AWS/자동화%20파이프라인%20구축/CodeBuild%20사용.md)
 2. [CODE DEPLOY. 구성](/md/AWS/자동화%20파이프라인%20구축/CodeDeploy%20사용.md)
 3. [CODE PIPELINE. 구성](/md/AWS/자동화%20파이프라인%20구축/CodePipeline%20사용.md)
 
-- [오류 해결1](/md/AWS/자동화%20파이프라인%20구축/img/경험한%20오류%20정리.md#시행착오-겪은-error01)
-- [오류 해결2](/md/AWS/자동화%20파이프라인%20구축/img/경험한%20오류%20정리.md#시행착오-겪은-error02)
+- [오류 해결1](/md/AWS/자동화%20파이프라인%20구축/etc/경험한%20오류%20정리.md#시행착오-겪은-error01)
+- [오류 해결2](/md/AWS/자동화%20파이프라인%20구축/etc/경험한%20오류%20정리.md#시행착오-겪은-error02)
 
 ---

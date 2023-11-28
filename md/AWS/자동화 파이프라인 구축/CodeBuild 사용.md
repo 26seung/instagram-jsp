@@ -25,6 +25,7 @@ CodeBuild가 CI/CD 파이프라인에서 담당할 과정은 다음과 같다
 ---
 ##### Configuration
 ![image](https://github.com/26seung/instagram-jsp/assets/79305451/8a2725b1-54af-4e0c-94c3-cfdba73cb2c6)
+
 - CodeBuild 프로젝트의 이름을 지정하고 선택적으로 설명을 입력
 - 빌드 배지 - 빌드에 대한 고유한 버전을 식별하기 위해 사용되며, 일반적으로 Git 커밋 해시 또는 버전과 관련된 정보를 포함한다.
 - 동시 빌드 제한 활성화 - CodeBuild 프로젝트에서 동시에 실행될 수 있는 최대 빌드 수를 제한하는 설정.
@@ -61,26 +62,39 @@ CHECK : 이미지 선택시 `x86_64` 확인 필요, `aarch64` 경우 이미지 �
 
 <img width="730" alt="image" src="https://github.com/26seung/instagram-jsp/assets/79305451/0d436608-131e-45fe-9289-7af3b1929df3">
 
-<br/> 
+- 빌드과정에 변수값이 필요하면 추가 설정
+  - ex : 암호화가 필요한 변수, `ECR` 주소 경로 등등... 
+
+<br/>
 
 ##### Buildspec
 <img width="797" alt="image" src="https://github.com/26seung/instagram-jsp/assets/79305451/d045f1f7-340d-4156-9284-231d57d0faf7">
 
 - Buildspec
     - 빌드 사양 - codeBuild 프로젝트가 수행될 명령어를 파일로 저장할지 프로젝트에 직접 입력할지 선택.
-    - Buildspec 이름 - buildspec을 작성할 파일의 이름을 지정, 선택하지 않으면 buildspec.yml
+    - Buildspec 이름 - buildspec을 작성할 파일의 이름을 지정, 선택하지 않으면 `buildspec.yml`
 - 아티팩트
     - 빌드 결과물을 출력할 유형 및 구성을 선택, ECR을 통해 이미지를 저장하면 아티팩트 없음 선택해도 무관한다.
     - 파일들은 `S3버킷`에 저장되며, `CODE DEPLOY`에서 배포과정에 사용 된다.
-    - `PIPELINE` 생성시 아티팩트 설정을 진행하여 건너뛴다.
+    - `PIPELINE` 구성 시 아티팩트 설정을 진행하여 여기서는 건너뛴다.
 
-##### log
+##### log setting
 
 <img width="796" alt="image" src="https://github.com/26seung/instagram-jsp/assets/79305451/ba995052-2d35-41da-9d18-068ccb7ac07a">
 
+- 빌드과정에 대한 진행사항을 기록하여 볼 수 있으므로 체크 해준다.
+
 이후 `프로젝트 생성`을 누르고 아래와 같은 작업을 추가 해주면 된다
 
+---
+
+### 이 후, buildspec.yml 파일 생성 필요
+
 <img width="1745" alt="image" src="https://github.com/26seung/instagram-jsp/assets/79305451/67a2aae2-4143-4b36-88a0-1f1b96a2122e">
+
+AWS CodeBuild의 buildspec에서 정의한 `buildspec.yml`파일을 `Root 디렉토리`에 생성한다.
+
+<br />
 
 ##### buildspec.yml
 
@@ -119,9 +133,9 @@ artifacts:
 - phases.build step.commands : 빌드 시 수행되는 명령어.
     - 도커를 이용하여 해당 애플리케이션을 이미지 빌드.
 - phases.post_build step.commands : 빌드 후 수행되는 명령어.
-    - 빌드된 이미지의 공통 tag를 지정
+    - 빌드된 이미지의 공통 tag를 지정 
     - 도커 이미지를 `ECR` 주소에 업로드
 - artifacts : `S3버킷`에 전달할 빌드 결과파일.
-    - [discard-paths: yes] : 해당 옵션 사용시 path(build/libs)는 무시되고 파일명으로만 업로드.
+  - [artifacts.discard-paths: yes] : 해당 옵션 사용시 path(build/libs)는 무시되고 파일명으로만 업로드.
 - cache.paths : 이곳의 파일을 S3 cache에 등록.
 

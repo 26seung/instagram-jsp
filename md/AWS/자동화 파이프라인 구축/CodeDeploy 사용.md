@@ -58,9 +58,10 @@ CodeDeploy가 CI/CD 파이프라인에서 담당할 과정은 다음과 같다
     - 지금 업데이트 - 에이전트가 이미 설치되어 있으면 최신버전으로 즉시 업데이트
     - 업데이트 일정 예약 -  설정한 일정에 따라 에이전트를 업데이트 하도록 설정
 - 배포 구성 - 여러대의 인스턴스에 배포할 경우 인스턴스에 얼마나 많은 트래픽을 라우팅할지 결정하는 정책
-    - CodeDeployDefault.OneAtTime - 한 번에 하나의 인스턴스에만 배포 수행. 배포 중에 서비스 중단이 없도록할 수 있지만 배포 시간이 길어질 수 있다.
-    - CodeDeployDefault.HalfAtTime - 배포 단계에서 사용 가능한 인스턴스의 절반에 배포 수행.
-    - CodeDeployDefault.AllAtOnce - 모든 인스턴스에 동시에 배포 수행. 가장 빠르지만 배포 중 모든 서비스가 중단될 수 있다.
+    - `CodeDeployDefault.OneAtTime` - 한 번에 하나의 인스턴스에만 배포 수행. 배포 중에 서비스 중단이 없도록할 수 있지만 배포 시간이 길어질 수 있다.
+    - `CodeDeployDefault.HalfAtTime` - 배포 단계에서 사용 가능한 인스턴스의 절반에 배포 수행.
+    - `CodeDeployDefault.AllAtOnce` - 모든 인스턴스에 동시에 배포 수행. 가장 빠르지만 배포 중 모든 서비스가 중단될 수 있다.
+- `로드 밸런싱 활성화` 체크 해제
 
 <br/> 
 
@@ -69,3 +70,109 @@ CodeDeploy가 CI/CD 파이프라인에서 담당할 과정은 다음과 같다
 
 - `PIPELINE` 사용시 설정 하므로 만들 필요 없음
 - `CODEDEPLOY` 단일로 실행시에는 생성하여 테스트 가능
+
+---
+
+### 이 후, appspec.yml 파일 생성 필요
+
+<img width="725" alt="image" src="https://github.com/26seung/instagram-jsp/assets/79305451/6e617c8a-61f8-4fc4-8b41-12dfedc9ad98">
+
+AWS CodeDeploy는 `appspec.yml`을 통해서 어떤 파일들을, 어느 위치에 배포하고, 이후 어떤 스크립트를 실행시킬 것인지를 관리한다.  
+따라서 CodeDeploy를 수행하기 위해선 `appspec.yml`파일을 `Root 디렉토리`에 생성한다.  
+
+- 배포하려는 스프링부트 소스코드(로컬)에 appspec.yml 및 배포 후 스크립트(deploy.sh) 생성
+- `buildspec.yml`파일의 `artifacts.files` 부분에 `appspec.yml 및 deploy.sh`를 추가
+- 해당 소스 `GitHub` 업로드 후 `CodeBuild`하게 되면 `appspec.yml, deploy.sh, docker-compose.yml, nginx.conf`가 .zip으로 패키징되어 `S3 버킷`에 업로드 됨
+- CodeDeploy 시 `S3`에 있는 .zip 파일을 unzip을 한 후 `appspec.yml` 파일을 참고하며 서비스 배포 실행
+
+<br />
+
+##### appspec.yml
+```yaml
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /home/ubuntu/deploy
+file_exists_behavior: OVERWRITE
+
+hooks:
+  AfterInstall:
+    - location: scripts/deploy.sh
+      timeout: 120
+      runas: root
+```
+<br />
+
+##### `배포스크립트`
+```
+#!/bin/bash
+
+# start
+echo deployDocker script started on `date`
+
+# go to "docker-compose" file directory
+cd /home/ubuntu/deploy
+pwd
+
+# AWS Systems Manager (use Parameter Store)
+export AWS_DEFAULT_REGION=$(aws ssm get-parameter --name /account/config/region --query 'Parameter.Value' --output text --with-decryption)
+export AWS_ACCOUNT_ID=$(aws ssm get-parameter --name /account/config/id --query 'Parameter.Value' --output text --with-decryption)
+export IMAGE_REPO_NAME=$(aws ssm get-parameter --name /ecr/repo/photo --query 'Parameter.Value' --output text --with-decryption)
+export IMAGE_TAG="latest"
+
+
+# ECR login
+aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+
+# pull docker image
+echo docker images pull...
+docker-compose -f docker-compose.yml pull
+
+# remove docker containers
+echo docker container down...
+docker-compose -f docker-compose.yml down
+
+# run docker containers
+echo docker container start...
+docker-compose -f docker-compose.yml up -d
+
+# remove any anonymous images
+docker image prune -af
+
+# finish
+echo deployDocker script end on `date`
+```
+- 사용된 환경변수는 `AWS Parameter Store` 사용하여 입력 구성
+- `CodeBuild`에서 업로드 하였던 `ECR` 에 로그인하여, 도커 이미지를 `PULL` 한다.
+- `artifacts` 가져왔던 `docker-compose.yml` 파일의 경로로 이동하여 도커컴포즈 실행
+- 용량 관리를 위하여 사용하지 않는 모든 이미지는 제거
+
+---
+
+### 이 후, EC2 내부 설치 필요
+
+##### Ubuntu Server에 CodeDeploy 에이전트 설치
+
+```
+#!/bin/bash
+sudo apt update -y
+sudo apt install ruby-full -y
+sudo apt install wget
+cd /home/ubuntu
+wget https://aws-codedeploy-ap-northeast-2.s3.ap-northeast-2.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+```
+- 서비스 실행중인지 확인 명령어 : 
+  - sudo service codedeploy-agent status
+  - sudo service codedeploy-agent start
+  - sudo service codedeploy-agent status
+
+
+
+
+---
+
+
