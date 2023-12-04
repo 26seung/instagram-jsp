@@ -139,3 +139,63 @@ artifacts:
   - [artifacts.discard-paths: yes] : 해당 옵션 사용시 path(build/libs)는 무시되고 파일명으로만 업로드.
 - cache.paths : 이곳의 파일을 S3 cache에 등록.
 
+<br />
+
+---
+
+### ETC. 도커이미지 빌드
+
+
+애플리케이션을 이미지로 빌드하여 사용시 꽤 큰 용량의 이미지 크기를 가지게 된다.  
+스토리지 용량 확보를 위하여 `멀티스테이지` 방식을 이용하여 이미지를 빌드 하여 이미지 사이즈를 반으로 줄였다..
+
+
+##### 기존 도커 이미지 빌드
+```dockerfile
+# APP
+FROM openjdk:11.0-slim
+
+WORKDIR /app
+#   현재 경로의 파일들을 "WORKDIR" 위치로 복사
+COPY . .
+#   권한설정 & jar build
+RUN chmod +x ./gradlew
+RUN ./gradlew clean build
+
+#  (jar/war) 파일 위치 설정
+ENV JAR_FILE=./build/libs/*-SNAPSHOT.war
+
+RUN mv ${JAR_FILE} /app/app.war
+
+ARG JA_SECRET
+ENV JASYPT_SECRETE_KEY=${JA_SECRET}
+ENV TZ=Asia/Seoul
+ENV DB_URL_ADDRESS=mariaDB
+
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app.war"]
+```
+
+##### 멀티스테이지 빌드
+
+```dockerfile
+# Build Stage
+FROM openjdk:11.0-slim AS build
+WORKDIR /app
+COPY . .
+RUN chmod +x ./gradlew
+RUN ./gradlew clean build
+
+# Final Stage
+FROM openjdk:11.0-slim
+WORKDIR /app
+COPY --from=build /app/build/libs/*-SNAPSHOT.war /app/app.war
+
+ARG JA_SECRET
+ENV JASYPT_SECRETE_KEY=${JA_SECRET}
+ENV TZ=Asia/Seoul
+ENV DB_URL_ADDRESS=mariaDB
+
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app.war"]
+```
+
+---

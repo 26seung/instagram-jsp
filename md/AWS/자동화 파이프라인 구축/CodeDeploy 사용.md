@@ -175,4 +175,15 @@ sudo ./install auto
 
 ---
 
+#### Parameter Store
+
+>`aws ssm get-parameter --name /account/config/region --with-decryption` 사용시 결과값
+<img width="904" alt="image" src="https://github.com/26seung/instagram-jsp/assets/79305451/33eaf9ce-ac9e-4125-a87e-ca2affeff6b2">
+
+- `aws ssm get-parameter` 명령어를 통해 파라미터를 조회 할 수 있다.
+- `--name` 태그를 이용하여 특정 값을 가져올 수 있다.
+- 파라미터 유형이 문자열 값은 상관 없지만 보안 문자열을 사용시에는 `--with-decryption`를 통해 복호화된 값을 볼 수 있다.
+- `aws ssm get-parameter --name /**/** --query 'Parameter.Value' --output text --with-decryption`사용하면 값만 추출가능
+- sudo snap install aws-cli --classic
+
 

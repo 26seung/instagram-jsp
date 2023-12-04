@@ -5,6 +5,7 @@
 #### 관련 페이지 이동
 - [API Document](md/API.md)
 - [AWS Arrchitecture](md/AWS.md)
+- [배포 자동화. CI/CD 구성](md/AWS/자동화%20파이프라인%20구축/README.md)
 
 ---
 
